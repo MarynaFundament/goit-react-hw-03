@@ -1,27 +1,62 @@
-import userData from './Profile/userData.json';
-import friends from "../components/FriendList/friends.json";
-import transactions from "./TransactionHistory/transactionhistory.json";
+import { useState, useEffect  } from "react"
+import { nanoid } from 'nanoid'
 
-import FriendList from "./FriendList/FriendList";
-import Profile  from "./Profile/Profile";
-import TransactionHistory from "./TransactionHistory/TransactionHistory";
+import ContactForm from "./ContactForm/ContactForm"
+import SearchBox from "./SearchBox/SearchBox"
+import ContactList from "./ContactList/ContactList"
+
+import data from "./contactList.json"
+
+const initialFormData = {
+  name: "",
+  number: "",
+  id: nanoid()
+ }
 
 
- export const App = () => {
+export const App = () => {
+
+  const getInitialData = () => {
+   const savedData = localStorage.getItem("contacts")
+   return savedData ? JSON.parse(savedData) : initialFormData
+
+  }
+
+    const [filterText, setFilter] = useState("");
+    const [contacts, setContacts] = useState(getInitialData());
+   
+
+    const filteredData = contacts.filter((el) => 
+    el.name.toLowerCase().includes(filterText.toLowerCase()))
+    
+    const handleAdd = (newContact) => { 
+      setContacts ((prevContacts) => {
+        return [...prevContacts, newContact ]
+      })
+    
+    };
+
+    const handleDelete = (contactId) => {
+      setContacts((prevContacts) => {
+        return prevContacts.filter (el => 
+          el.id !== contactId)
+      })
+    
+    }
+
+
+    useEffect(() => {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }, [contacts]);
+
   
   return (
     <div>
- 
-     <Profile
-      name={userData.name}
-      tag={userData.tag}
-      location={userData.location}
-      avatar={userData.avatar}
-      stats={userData.stats}
-    />
+      <h1>Phonebook</h1>
 
-       <FriendList friends={friends} /> 
-       <TransactionHistory items={transactions} />
+      <ContactForm  value = {initialFormData} onAdd = {handleAdd}/>
+      <SearchBox value = {filterText} onChange = {setFilter}/>
+      <ContactList data={filteredData} onDelete = {handleDelete} />
 
     </div>
   );
