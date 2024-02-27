@@ -18,12 +18,13 @@ export const App = () => {
 
   const getInitialData = () => {
    const savedData = localStorage.getItem("contacts")
-   return savedData ? JSON.parse(savedData) : initialFormData
+   return savedData ? JSON.parse(savedData) : [ ]
 
   }
 
     const [filterText, setFilter] = useState("");
     const [contacts, setContacts] = useState(getInitialData());
+    
    
 
     const filteredData = contacts.filter((el) => 
