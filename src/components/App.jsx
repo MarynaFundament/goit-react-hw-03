@@ -57,7 +57,7 @@ export const App = () => {
 
       <ContactForm  value = {initialFormData} onAdd = {handleAdd}/>
       <SearchBox value = {filterText} onChange = {setFilter}/>
-      <ContactList data={filteredData} onDelete = {handleDelete} />
+      <ContactList contacts={filteredData} onDelete = {handleDelete} />
 
     </div>
   );

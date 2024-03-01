@@ -60,7 +60,9 @@ const handleSubmit = (e, { resetForm }) => {
     )
 }
 
-
-
+ContactForm.propTypes = {
+    value: PropTypes.object.isRequired,
+    onAdd: PropTypes.func.isRequired,
+  };
 
 export default ContactForm

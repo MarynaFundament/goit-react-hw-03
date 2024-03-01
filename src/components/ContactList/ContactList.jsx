@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 
 
-const ContactList = ({data, onDelete}) => {
+const ContactList = ({contacts, onDelete}) => {
 
     return (
         <ul>
-        { data.map((el) =>(
+        { contacts.map((el) =>(
 
         <li key={el.id}>
         <Contact data = {el} onDelete = {onDelete}/>

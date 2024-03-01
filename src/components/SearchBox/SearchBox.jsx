@@ -9,8 +9,10 @@ const SearchBox = ({value, onChange}) => {
         <p> Find contacts by name</p>
 
         <input className={styles.inp} type="text"
+          placeholder="Input name or number here"
           value={value}
           onChange={(e) => onChange(e.target.value)} />
+          
 
         </div>
         )}

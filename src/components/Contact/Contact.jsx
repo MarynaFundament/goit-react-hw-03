@@ -31,8 +31,12 @@ const Contact = ({data : {id, name, number}, onDelete}) => {
 }
 
 Contact.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.number.isRequired,
+  }),
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default Contact; 
